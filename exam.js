@@ -7,56 +7,69 @@ let string2 = "aefcnbtdi";
 // expected outcome:abd,acd
 
 // through simple looping:
+
 let longestCommmonSubsequence = (string1, string2)=>{
-let arr =[];
-cs1=()=>{
-let startingIndex=0;
-  let result="";  
-  for (let i = 0; i < string1.length; i += 1) {
-    console.log(string1[i]);
-    console.log(startingIndex)
-       findMatch=()=>{ 
-            for (let b = startingIndex; b < string2.length; b += 1) {
-                if(string1[i]=== string2[b]){ 
-                    startingIndex= b+1; 
-                    result += string1[i]; 
-                    break;
-                    
-                  }
-            }
-       }
-       findMatch();
-  }
-  return result;}
 
+	// find the common subsequence using string1 as basis:
+	cs1=()=>{
+	let startingIndex=0;
+	  let result="";  
+	  for (let i = 0; i < string1.length; i += 1) {
+	    console.log(string1[i]);
+	    console.log(startingIndex)
+	    // function to find its equivalent/matching character in string2 by looping
+	    // if found, a new value will be assigned to startingindex so as to not go back to index 0 of string2 for next looping
+	       findMatch=()=>{ 
+	            for (let b = startingIndex; b < string2.length; b += 1) {
+	                if(string1[i]=== string2[b]){ 
+	                    startingIndex= b+1; 
+	                    result += string1[i]; 
+	                    break;
+	                    
+	                  }
+	            }
+	       }
+	       findMatch();
+	  }
+	  // if(result !== ""){return cs.push(result);}
+	  if(result !== ""){return result;}
+	  
+	};
 
-cs2=()=>{
-   let result=""; 
-   let startingIndex=0;
-   for (let a = 0; a < string2.length; a += 1) {
-        findMatch=()=>{ 
-            // console.log(startingIndex);
-             for (let b = startingIndex; b < string1.length; b += 1) {
-                 if(string2[a]=== string1[b]){ 
-                     startingIndex= b+1;
-                      result += string2[a];
-                      break;
-                     
-                   }
-             }
-        }
-        findMatch();
-   }
-   return result;
-};
+	// find the common subsequence using string2 as basis:
+	cs2=()=>{
+	   let result=""; 
+	   let startingIndex=0;
+	   for (let a = 0; a < string2.length; a += 1) {
+	   		// function to find its equivalent/matching character in string1 by looping
+	        findMatch=()=>{ 
+	            // console.log(startingIndex);
+	             for (let b = startingIndex; b < string1.length; b += 1) {
+	                 if(string2[a]=== string1[b]){ 
+	                     startingIndex= b+1;
+	                      result += string2[a];
+	                      break;
+	                     
+	                   }
+	             }
+	        }
+	        findMatch();
+	   }
+	   // if(result !== ""){return cs.push(result);}
+	   if(result !== ""){return result;}
+	};
+	// cs2(); cs1();
+	let= cs =[cs1(), cs2()];
+	// console.log(cs.length);console.log(cs);
+	 if(cs[0] !== undefined && cs[1] !== undefined){ 
+	    if(cs[0]=== cs[1] && cs[0].length === cs[1].length){return cs[0]}
+	    if(cs[0].length > cs[1].length){return cs[0]}
+	    if(cs[0].length < cs[1].length){return cs[1]}
+	    if(cs[0].length === cs[1].length && cs[0]!== cs[1]){return cs}
+	 }
 
- let a1 =[cs1(), cs2()];
- if(a1[0]=== a1[1]){return a1[0]}
- if(a1[0].length > a1[1].length){return a1[0]}
- if(a1[0].length < a1[1].length){return a1[1]}
- if(a1[0].length = a1[1].length && a1[0]!== a1[1]){return a1}
- else{return "no common subsequence found"}
+	 else{return "no common subsequence"}
  
 };
 longestCommmonSubsequence(string1,string2);
-console.log ("answer:"+ longestCommmonSubsequence(string1,string2))
+console.log ("ANSWER:"+ longestCommmonSubsequence(string1,string2))
