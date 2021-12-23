@@ -1,7 +1,6 @@
 // LONGEST COMMON SUBSEQUENCE OF TWO STRINGS:
-// note: NO string functions , NO recursions
-/*options: looping (simple, easy to understand)
- or dynamic programming (good for finding the length of lcs)*/
+
+
 let string1 = "ajblqcpdz";
 let string2 = "aefcnbtdi";
 // expected outcome:abd,acd
@@ -9,20 +8,29 @@ let string2 = "aefcnbtdi";
 // through simple looping:
 longestCommmonSubsequence = (string1, string2)=>{
 
+	// count the length of of string:
+	count=(s)=>{
+	  let length = 0;
+	  while (s[length] !== undefined)
+	    length++;
+	  return length;
+	};
+	let lengthOfString1 = count(string1);
+	let lengthOfString2 = count(string2);
+
 	// find the common subsequence using string1 as basis:
 	cs1=()=>{
-	let startingIndex=0;
-	  let result="";  
-	  for (let i = 0; i < string1.length; i += 1) {
-	    console.log(string1[i]);
-	    console.log(startingIndex)
+		let startingIndex=0;
+	  	let result="";  
+
+	  for (let a = 0; a < lengthOfString1; a += 1) {
 	    // function to find its equivalent/matching character in string2 by looping
-	    // if found, a new value will be assigned to startingindex so as to not go back to index 0 of string2 for next looping
+	    // if found, a new value will be assigned to starting index so as not to go back to index 0 of string2 for next looping
 	       findMatch=()=>{ 
-	            for (let b = startingIndex; b < string2.length; b += 1) {
-	                if(string1[i]=== string2[b]){ 
+	            for (let b = startingIndex; b < lengthOfString2; b += 1) {
+	                if(string1[a]=== string2[b]){ 
 	                    startingIndex= b+1; 
-	                    result += string1[i]; 
+	                    result += string1[a]; 
 	                    break;
 	                  }
 	            }
@@ -37,10 +45,10 @@ longestCommmonSubsequence = (string1, string2)=>{
 	cs2=()=>{
 	   let result=""; 
 	   let startingIndex=0;
-	   for (let a = 0; a < string2.length; a += 1) {
+
+	   for (let a = 0; a < lengthOfString2; a += 1) {
 	        findMatch=()=>{ 
-	            // console.log(startingIndex);
-	             for (let b = startingIndex; b < string1.length; b += 1) {
+	             for (let b = startingIndex; b < lengthOfString1; b += 1) {
 	                 if(string2[a]=== string1[b]){ 
 	                     startingIndex= b+1;
 	                      result += string2[a];
@@ -55,28 +63,22 @@ longestCommmonSubsequence = (string1, string2)=>{
 	};
 
 // -----supppose .length isn't allowed to use-------
-let cs = [cs1(), cs2()];
-	// count the length of each cs:
-	count=(s)=>{
-	  let length = 0;
-	  while (cs[0][length] !== undefined)
-	    length++;
-	  return length;
-	};
+		let cs = [cs1(), cs2()];
+		let cs1Length=count(cs[0]);
+		let cs2Length=count(cs[1]);
 
-let cs1Length=count(cs[0]);
-let cs2Length=count(cs[1]);
-console.log("length1 "+ cs1Length); console.log("length2 "+ cs2Length); 
- if(cs[0] !== undefined && cs[1] !== undefined){ 
-    if(cs[0]=== cs[1] &&  cs1Length === cs2Length){return cs[0]}
-    if( cs1Length > cs2Length){return cs[0]}
-    if( cs1Length < cs2Length){return cs[1]}
-    if( cs1Length === cs2Length && cs[0]!== cs[1]){return cs}
- }
+ 		if(cs[0] !== undefined && cs[1] !== undefined){ 
+ 		   if(cs[0]=== cs[1] &&  cs1Length === cs2Length){return cs[0]}
+		    if( cs1Length > cs2Length){return cs[0]}
+		    if( cs1Length < cs2Length){return cs[1]}
+		    if( cs1Length === cs2Length && cs[0]!== cs[1]){return cs}
+		 }
 
- else{return "no common subsequence"}
+ else{return "No common subsequence found"}
  
 };
 
+
+
 longestCommmonSubsequence(string1,string2);
-console.log ("ANSWER:"+ longestCommmonSubsequence(string1,string2))
+
